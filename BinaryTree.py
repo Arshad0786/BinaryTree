@@ -19,35 +19,45 @@ class BinaryTree:
         self.root.rightNode.leftNode = TreeNode(60)
         self.root.rightNode.rightNode = TreeNode(70)
 
-    def preorderTraversal(self, TreeNode):
+    def preorder_recursive(self, TreeNode):
         if not TreeNode:
             return []
         output = []
         output.append(TreeNode.val)
         if TreeNode.leftNode:
-            output = output + self.preorderTraversal(TreeNode.leftNode)
+            output = output + self.preorder_recursive(TreeNode.leftNode)
         if TreeNode.rightNode:
-            output = output + self.preorderTraversal(TreeNode.rightNode)
+            output = output + self.preorder_recursive(TreeNode.rightNode)
         return output
 
-    def inorderTraversal(self, TreeNode):
+    def inorder_recursive(self, TreeNode):
         if not TreeNode:
             return []
         output = []
         if TreeNode.leftNode:
-            output = output + self.inorderTraversal(TreeNode.leftNode)
+            output = output + self.inorder_recursive(TreeNode.leftNode)
         output.append(TreeNode.val)
         if TreeNode.rightNode:
-            output = output + self.inorderTraversal(TreeNode.rightNode)
+            output = output + self.inorder_recursive(TreeNode.rightNode)
         return output
 
-    def postorderTraversal(self, TreeNode):
+    def postorder_recursive(self, TreeNode):
         if not TreeNode:
             return []
         output = []
         if TreeNode.leftNode:
-            output = output + self.postorderTraversal(TreeNode.leftNode)
+            output = output + self.postorder_recursive(TreeNode.leftNode)
         if TreeNode.rightNode:
-            output = output + self.postorderTraversal(TreeNode.rightNode)
+            output = output + self.postorder_recursive(TreeNode.rightNode)
         output.append(TreeNode.val)
         return output
+
+    def preorder_stack(slef, TreeNode):
+        if not TreeNode:
+            return []
+        output = []
+        stack = []
+        stack.append(TreeNode)
+        while stack:
+            pass
+        

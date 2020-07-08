@@ -3,23 +3,23 @@ from BinaryTree import BinaryTree
 
 
 class BinaryTreeTest(unittest.TestCase):
-    def test_preorderTraversal(self):
+    def test_preorder_recursive(self):
         temp = BinaryTree()
         temp.initExampleTree()
         self.assertEqual(
-            temp.preorderTraversal(temp.root), [10, 20, 40, 50, 30, 60, 70]
+            temp.preorder_recursive(temp.root), [10, 20, 40, 50, 30, 60, 70]
         )
 
-    def test_inorderTraversal(self):
+    def test_inorder_recursive(self):
         temp = BinaryTree()
         temp.initExampleTree()
-        self.assertEqual(temp.inorderTraversal(temp.root), [40, 20, 50, 10, 60, 30, 70])
+        self.assertEqual(temp.inorder_recursive(temp.root), [40, 20, 50, 10, 60, 30, 70])
 
-    def test_postorderTraversal(self):
+    def test_postorder_recursive(self):
         temp = BinaryTree()
         temp.initExampleTree()
         self.assertEqual(
-            temp.postorderTraversal(temp.root), [40, 50, 20, 60, 70, 30, 10]
+            temp.postorder_recursive(temp.root), [40, 50, 20, 60, 70, 30, 10]
         )
 
 
