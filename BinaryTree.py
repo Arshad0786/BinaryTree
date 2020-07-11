@@ -1,3 +1,5 @@
+from collections import deque
+
 class TreeNode:
     def __init__(self, val, root=None, leftNode=None, rightNode=None):
         self.val = val
@@ -74,12 +76,12 @@ class BinaryTree:
         stack = []
         stack.append(TreeNode)
         while stack:
-            root = stack.pop()
-            output.append(root.val)
-            if root.rightNode:
-                stack.append(root.rightNode)
-            if root.leftNode:
-                stack.append(root.leftNode)
+            current = stack.pop()
+            output.append(current.val)
+            if current.rightNode:
+                stack.append(current.rightNode)
+            if current.leftNode:
+                stack.append(current.leftNode)
         return output
     
     def inorder_stack(self, TreeNode):
@@ -87,23 +89,54 @@ class BinaryTree:
             return []
         output = []
         stack = []
-        root = TreeNode
-        while stack or root:
-            while(root):
-                stack.append(root)
-                root = root.leftNode
-            root = stack.pop()
-            output.append(root.val)
-            root = root.rightNode
+        current = TreeNode
+        while stack or current:
+            while(current): # go to the most left node of the tree
+                stack.append(current)
+                current = current.leftNode
+                """
+                If it reaches null, goto last node, append it to output
+                since it's the most left node, then go right. 
+                If right node is null, current will get last node from stack and append it
+                to output since it's the second left node
+                """
+            current = stack.pop() # 
+            output.append(current.val) # 
+            current = current.rightNode # 
         return output
     
     def postorder_stack(self, TreeNode):
+        # easier to make a postorder traversal by doing it backward then output the reversed result
         if not TreeNode:
             return []
         output = []
         stack = []
-        
-            
-            
-            
-        
+        stack.append(TreeNode)
+        while stack:
+            current = stack.pop()
+            output.append(current.val)
+            if current.leftNode:
+                stack.append(current.leftNode)
+            if current.rightNode:
+                stack.append(current.rightNode)
+        return output[::-1]
+    
+    def levelorder(self,TreeNode):
+        if not TreeNode:
+            return []
+        output = []
+        nextLevelQueue = deque()
+        nextLevelQueue.append(TreeNode)
+        while(nextLevelQueue):
+            thisLevelOutput = []
+            currentLevelQueue = nextLevelQueue
+            nextLevelQueue = deque()
+            while(currentLevelQueue):
+                current = currentLevelQueue.pop()
+                thisLevelOutput.append(current.val)
+                if current.leftNode:
+                    nextLevelQueue.appendleft(current.leftNode)
+                if current.rightNode:
+                    nextLevelQueue.appendleft(current.rightNode)
+            output.append(thisLevelOutput)
+        return output

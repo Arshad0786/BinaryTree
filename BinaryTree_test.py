@@ -32,6 +32,17 @@ class BinaryTreeTest(unittest.TestCase):
         temp.initExampleTree()
         self.assertEqual(temp.inorder_recursive(temp.root),temp.inorder_stack(temp.root))
     
+    def test_postorder_stack(self):
+        temp = BinaryTree()
+        temp.initExampleTree()
+        self.assertEqual(temp.postorder_recursive(temp.root),temp.postorder_stack(temp.root))
+
+    def test_levelorder(self):
+        temp = BinaryTree()
+        temp.initExampleTree()
+        result = [[10],[20,30],[40,50,60,70]]
+        self.assertEqual(temp.levelorder(temp.root), result)
+
     def test_leftLeaningTreeTest(self):
         temp = BinaryTree()
         temp.initLeftLeaningTree()
