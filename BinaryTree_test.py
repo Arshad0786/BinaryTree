@@ -1,5 +1,5 @@
 import unittest
-from BinaryTree import BinaryTree
+from BinaryTree import BinaryTree,TreeNode
 
 
 class BinaryTreeTest(unittest.TestCase):
@@ -51,7 +51,7 @@ class BinaryTreeTest(unittest.TestCase):
         result = [[10], [20, 30], [40, 50, 60, 70]]
         self.assertEqual(temp.levelorder(temp.root), result)
 
-    def test_leftLeaningTreeTest(self):
+    def test_leftLeaningTree(self):
         temp = BinaryTree()
         temp.initLeftLeaningTree()
         result = []
@@ -61,7 +61,7 @@ class BinaryTreeTest(unittest.TestCase):
         self.assertEqual(temp.inorder_recursive(temp.root), result[::-1])
         self.assertEqual(temp.postorder_recursive(temp.root), result[::-1])
 
-    def test_rightLeaningTreeTest(self):
+    def test_rightLeaningTree(self):
         temp = BinaryTree()
         temp.initRightLeaningTree()
         result = []
@@ -70,6 +70,39 @@ class BinaryTreeTest(unittest.TestCase):
         self.assertEqual(temp.preorder_recursive(temp.root), result)
         self.assertEqual(temp.inorder_recursive(temp.root), result)
         self.assertEqual(temp.postorder_recursive(temp.root), result[::-1])
+
+    def test_depth(self):
+        temp = BinaryTree()
+        self.assertEqual(temp.depth(temp.root),0)
+        temp.root = TreeNode(10)
+        self.assertEqual(temp.depth(temp.root),1)
+        temp.initExampleTree()
+        self.assertEqual(temp.depth(temp.root),3)
+        temp.initLeftLeaningTree()
+        self.assertEqual(temp.depth(temp.root),11)
+        temp.initRightLeaningTree()
+        self.assertEqual(temp.depth(temp.root),11)
+
+    def test_isBalanced(self):
+        temp = BinaryTree()
+        self.assertEqual(temp.isBalanced(temp.root),True)
+        temp.root = TreeNode(10)
+        self.assertEqual(temp.isBalanced(temp.root),True)
+        temp.initExampleTree()
+        self.assertEqual(temp.isBalanced(temp.root),True)
+        temp.initLeftLeaningTree()
+        self.assertEqual(temp.isBalanced(temp.root),False)
+        temp.initRightLeaningTree()
+        self.assertEqual(temp.isBalanced(temp.root),False)
+        temp.root = TreeNode(1)
+        temp.root.leftNode = TreeNode(2)
+        temp.root.rightNode = TreeNode(2)
+        temp.root.leftNode.leftNode = TreeNode(3)
+        temp.root.leftNode.leftNode.leftNode = TreeNode(4)
+        self.assertEqual(temp.isBalanced(temp.root),False)
+
+
+
 
 
 if __name__ == "__main__":

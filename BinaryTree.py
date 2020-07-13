@@ -92,7 +92,7 @@ class BinaryTree:
                 stack.append(current)
                 current = current.leftNode
                 """
-                If it reaches null, goto last node, append it to output
+                If it reaches null, goto last node in stack, append it to output
                 since it's the most left node, then go right. 
                 If right node is null, current will get last node from stack and append it
                 to output since it's the second left node
@@ -136,3 +136,18 @@ class BinaryTree:
                     nextLevelQueue.append(current.rightNode)
             output.append(thisLevelOutput)
         return output
+    
+    def depth(self, TreeNode):
+        """
+        return the depth of Binary Tree 
+        """
+        if not TreeNode:
+            return 0
+        return 1 + max(self.depth(TreeNode.leftNode),self.depth(TreeNode.rightNode))
+
+    def isBalanced(self, TreeNode):
+        if not TreeNode:
+            return True
+        if abs(self.depth(TreeNode.leftNode) - self.depth(TreeNode.rightNode)) > 1:
+            return False
+        return (True and self.isBalanced(TreeNode.leftNode) and self.isBalanced(TreeNode.rightNode))
