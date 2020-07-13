@@ -1,5 +1,3 @@
-from collections import deque
-
 class TreeNode:
     def __init__(self, val, root=None, leftNode=None, rightNode=None):
         self.val = val
@@ -25,16 +23,15 @@ class BinaryTree:
         self.root = TreeNode(0)
         tracer = self.root
         for i in range(10):
-            tracer.leftNode = TreeNode((i+1)*10)
+            tracer.leftNode = TreeNode((i + 1) * 10)
             tracer = tracer.leftNode
 
     def initRightLeaningTree(self):
         self.root = TreeNode(0)
         tracer = self.root
         for i in range(10):
-            tracer.rightNode = TreeNode((i+1)*10)
+            tracer.rightNode = TreeNode((i + 1) * 10)
             tracer = tracer.rightNode
-    
 
     def preorder_recursive(self, TreeNode):
         if not TreeNode:
@@ -83,7 +80,7 @@ class BinaryTree:
             if current.leftNode:
                 stack.append(current.leftNode)
         return output
-    
+
     def inorder_stack(self, TreeNode):
         if not TreeNode:
             return []
@@ -91,7 +88,7 @@ class BinaryTree:
         stack = []
         current = TreeNode
         while stack or current:
-            while(current): # go to the most left node of the tree
+            while current:  # go to the most left node of the tree
                 stack.append(current)
                 current = current.leftNode
                 """
@@ -100,11 +97,11 @@ class BinaryTree:
                 If right node is null, current will get last node from stack and append it
                 to output since it's the second left node
                 """
-            current = stack.pop() # 
-            output.append(current.val) # 
-            current = current.rightNode # 
+            current = stack.pop()  #
+            output.append(current.val)  #
+            current = current.rightNode  #
         return output
-    
+
     def postorder_stack(self, TreeNode):
         # easier to make a postorder traversal by doing it backward then output the reversed result
         if not TreeNode:
@@ -120,23 +117,22 @@ class BinaryTree:
             if current.rightNode:
                 stack.append(current.rightNode)
         return output[::-1]
-    
-    def levelorder(self,TreeNode):
+
+    def levelorder(self, TreeNode):
         if not TreeNode:
             return []
         output = []
-        nextLevelQueue = deque()
+        nextLevelQueue = []
         nextLevelQueue.append(TreeNode)
-        while(nextLevelQueue):
+        while nextLevelQueue:
             thisLevelOutput = []
             currentLevelQueue = nextLevelQueue
-            nextLevelQueue = deque()
-            while(currentLevelQueue):
-                current = currentLevelQueue.pop()
+            nextLevelQueue = []
+            for current in currentLevelQueue:
                 thisLevelOutput.append(current.val)
                 if current.leftNode:
-                    nextLevelQueue.appendleft(current.leftNode)
+                    nextLevelQueue.append(current.leftNode)
                 if current.rightNode:
-                    nextLevelQueue.appendleft(current.rightNode)
+                    nextLevelQueue.append(current.rightNode)
             output.append(thisLevelOutput)
         return output
